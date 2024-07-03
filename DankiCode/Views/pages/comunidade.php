@@ -20,6 +20,22 @@
 		?>
 		<div class="feed">
 			<div class="comunidade">
+				<div class="container-comunidade">
+					<h4>Amigos</h4>
+					<div class="container-comunidade-wraper">
+						<?php foreach(\DankiCode\Models\UsuariosModel::listarAmigos() as $key => $value){ ?>
+						<div class="container-comunidade-singles">
+							<div class="img-comunidade-user-single">
+								<img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg"/>
+							</div>		
+							<div class="info-comunidade-user-singles">
+								<h2><?php echo $value['nome'];?></h2>
+								<p><?php  echo $value['email']   ?></p>
+							</div>
+					</div>
+				<?php }?>
+					</div>
+				</div>
 			<div class="container-comunidade">
 					<h4>Comunidade</h4>
 					<div class="container-comunidade-wraper">

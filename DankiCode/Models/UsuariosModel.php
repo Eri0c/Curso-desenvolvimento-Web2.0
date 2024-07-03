@@ -112,4 +112,31 @@ class UsuariosModel {
         }
 
     }
+
+    public static function listarAmigos(){
+        $pdo = \DankiCode\MySql::connect();
+
+        $amizades = $pdo->prepare("SELECT * FROM amizades WHERE (enviou = ? AND estado = 1) OR (recebeu = ? AND estado = 1)");
+
+        $amizades->execute(array($_SESSION['id'],$_SESSION['id']));
+
+        $amizades = $amizades->fetchAll();
+
+        $amigosConfirmados = array();
+        foreach ($amizades as $key => $value){
+            if($value['enviou'] == $_SESSION['id']){
+                $amigosConfirmados[]= $value['recebeu'];
+            }else{
+                $amigosConfirmados[]= $value['enviou'];
+            }
+        }
+
+        $listaAmigos = array();
+        foreach($amigosConfirmados as $key => $value){
+            $listaAmigos[$key]['nome'] = self::getUsuarioById($value)['nome'];
+            $listaAmigos[$key]['email'] = self::getUsuarioById($value)['email'];
+
+        }
+        return $listaAmigos;
+    }
 }
