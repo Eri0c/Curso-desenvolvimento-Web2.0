@@ -32,13 +32,15 @@ class UsuariosModel {
     }
 
     // Método para enviar solicitação de amizade.
+    // $idPara, representa o ID do usuário para quem a solicitação de amizade será enviada.
     public static function solicitarAmizade($idPara) {
         $pdo = \DankiCode\MySql::connect();
         
         // Verifica se já existe uma solicitação de amizade entre os usuários.
         $verificaAmizade = $pdo->prepare("SELECT * FROM amizades WHERE (enviou = ? AND recebeu = ?) OR (enviou = ? AND recebeu = ?)");
         $verificaAmizade->execute(array($_SESSION['id'], $idPara, $idPara, $_SESSION['id']));
-
+        
+    //Se o número de linhas retornadas (rowCount()) for igual a 1,já existe uma solicitação de amizade entre esses dois usuários.    
         if ($verificaAmizade->rowCount() == 1) {
             return false; // Já existe uma solicitação de amizade.
         } else {
