@@ -67,6 +67,7 @@ class HomeController{
                         $_SESSION['login'] = $dados['email'];
                         $_SESSION['id'] = $dados['id'];
                         $_SESSION['nome'] = explode(' ', $dados['nome'])[0];
+                        $_SESSION['img'] = $dados=['img'];
                         \DankiCode\Utilidades::alerta('Logado com sucesso!');
                         \DankiCode\Utilidades::redirect(INCLUDE_PATH);
                     } else {

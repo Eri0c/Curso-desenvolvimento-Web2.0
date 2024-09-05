@@ -69,6 +69,8 @@ class HomeModel {
 
             $listaAmigos[$key]['email'] = \DankiCode\Models\UsuariosModel::getUsuarioById($value)['email'];
 
+            $listaAmigos[$key]['img'] = \DankiCode\Models\UsuariosModel::getUsuarioById($value)['img'];
+
             $listaAmigos[$key]['ultimo_post'] = \DankiCode\Models\UsuariosModel::getUsuarioById($value)['ultimo_post'];
 
         }
@@ -106,6 +108,8 @@ class HomeModel {
                 $ultimoPost = $ultimoPost->fetch();
 
                 $posts[$key]['usuario'] = $value['nome'];
+
+                $posts[$key]['img'] = $value['img'];
 
                 $posts[$key]['data'] = $ultimoPost['date'];
 
