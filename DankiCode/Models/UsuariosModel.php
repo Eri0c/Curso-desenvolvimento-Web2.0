@@ -137,7 +137,8 @@ class UsuariosModel {
         foreach($amigosConfirmados as $key => $value){
             $listaAmigos[$key]['nome'] = self::getUsuarioById($value)['nome'];
             $listaAmigos[$key]['email'] = self::getUsuarioById($value)['email'];
-
+            $listaAmigos[$key]['img'] = self::getUsuarioById($value)['img'];
+            
         }
         return $listaAmigos;
     }

@@ -21,19 +21,22 @@
             <div class ="editar-perfil">
             <h2>Editando perfil:</h2>
             <br/>
-                <?php 
-                    if(isset($_SESSION['img']) && $_SESSION['img'] ==''){
-                        echo '<img src="'.INCLUDE_PATH_STATIC.'images/avatar.jpg" />';
+            <?php 
+                if(isset($_SESSION['img']) && is_string($_SESSION['img']) && $_SESSION['img'] == ''){
+                        echo '<img style="max-width:400px;width:100%;" src="'.INCLUDE_PATH_STATIC.'images/avatar.jpg" />';
+                    }elseif(isset($_SESSION['img']) && is_string($_SESSION['img'])){
+                        echo '<img style="max-width:400px;width:100%;" src="'.INCLUDE_PATH.'uploads/'.$_SESSION['img'].'" />';
                     }else{
-                        echo '<img src="'.INCLUDE_PATH_STATIC.'images/'.$_SESSION['img'].'" />';
+                        echo '<img src="'.INCLUDE_PATH_STATIC.'images/avatar.jpg" />';// Exibe um avatar padrão caso não seja string
                     }
-                
-                ?>
+            ?>
+
                 <br/>
-                <form >
+                <form method = "post" enctype="multipart/form-data">
                     <input type="text" name="nome" value="<?php echo $_SESSION['nome'] ?>">
                     <input type="password" name="senha" placeholder="sua nova senha...">
                     <input type="file" name="file">
+                    <input type="hidden" name="atualizar" value = "atualizar">
                     <input type="submit" name="acao" value="Salvar">
                 </form>
             </div>
